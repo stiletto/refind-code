@@ -247,7 +247,9 @@ VOID BeginExternalScreen(IN BOOLEAN UseGraphicsMode, IN CHAR16 *Title)
 
     if (UseGraphicsMode) {
         SwitchToGraphics();
-        BltClearScreen(FALSE);
+        // I use BGRT as my banner, setting ShowBanner to TRUE avoids black screen flickering
+        // for a moment before linux kernel draws BGRT again
+        BltClearScreen(TRUE);
     } else {
         egClearScreen(&DarkBackgroundPixel);
         DrawScreenHeader(Title);
